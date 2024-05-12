@@ -34,8 +34,8 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Book Library API",
-      description: "API documentation for Book Library",
+      title: "Book API",
+      description: "API documentation for Book ",
 
       version: "1.0.0",
     },

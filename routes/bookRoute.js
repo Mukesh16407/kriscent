@@ -14,9 +14,9 @@ const {
 
 /**
  * @swagger
- * /:
+ * /books:
  *   get:
- *     summary: Test Api
+ *     summary: Get All Books
  *     description: Testing an API.
  */
 
