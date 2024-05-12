@@ -15,7 +15,7 @@ const { registerUser, loginUser } = require("../controllers/authController");
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/UserRegistration'
+ *             $ref: './models/usersModal.js'
  *     responses:
  *       '201':
  *         description: User registered successfully
@@ -47,7 +47,7 @@ router.post("/register", registerUser);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/UserLogin'
+ *             $ref: './models/usersModal.js'
  *     responses:
  *       '200':
  *         description: User logged in successfully
