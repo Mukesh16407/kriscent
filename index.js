@@ -46,7 +46,7 @@ const options = {
       },
     ],
   },
-  apis: ["./routes*.js", "index.js"], // files containing annotations as above
+  apis: ["./routes/bookRoute.js", "./routes/authRoute.js", "index.js"], // files containing annotations as above
 };
 
 // Swagger UI
