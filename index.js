@@ -1,10 +1,12 @@
 const express = require("express");
 const morgan = require("morgan");
+
 const swaggerUi = require("swagger-ui-express");
+const swaggerJSDoc = require("swagger-jsdoc");
+
 const dbConfig = require("./config/dbConfig");
 
-const swaggerDocument = require("./swagger.json");
-const userRoutes = require("./routes/usersRoute");
+const authRoutes = require("./routes/authRoute");
 const bookRoutes = require("./routes/bookRoute");
 
 const logger = require("./middleWares/logger");
@@ -22,13 +24,42 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(logger);
 
-app.use("/users", userRoutes);
+app.use("/users", authRoutes);
 app.use("/books", bookRoutes);
 
 // Error Handling Middleware
 app.use(errorHandler);
+
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Book Library API",
+      description: "API documentation for Book Library",
+
+      version: "1.0.0",
+    },
+    servers: [
+      {
+        url: "http://localhost:3000",
+        description: "local server",
+      },
+    ],
+  },
+  apis: ["./routes*.js", "index.js"], // files containing annotations as above
+};
+
 // Swagger UI
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+const swaggerSpec = swaggerJSDoc(options);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Test Api
+ *     description: Testing an API.
+ */
 
 app.get("/", (req, res) => {
   res.json({
